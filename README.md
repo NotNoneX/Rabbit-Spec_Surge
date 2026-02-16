@@ -1,6 +1,4 @@
 [![Support on Afdian](https://img.shields.io/badge/Support-爱发电-orange.svg?style=flat-square&logo=afdian)](https://afdian.com/a/Rabbit-Spec)
-
-
 <h1 align="center">Surge自用配置以及模块和脚本</h1>
 
 <p align="center">
