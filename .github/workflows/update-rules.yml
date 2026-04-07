@@ -3,7 +3,7 @@ name: Surge Rules
 # 触发器配置：定义工作流何时运行
 on:
   schedule:
-    # 定时任务：每天 UTC 时间 23:00 执行
+    # 定时任务：每天 UTC 时间 23:00 执行（北京时间 07:00）
     - cron: '0 23 * * *'
   # 允许在 GitHub 网页端的 Actions 面板中手动点击 "Run workflow" 按钮触发更新
   workflow_dispatch:
@@ -17,6 +17,11 @@ jobs:
   update-rules:
     # 运行环境：指定分配一台 GitHub 官方托管的最新版 Ubuntu Linux 虚拟机来执行脚本
     runs-on: ubuntu-latest
+    
+    # 强制所有 JavaScript Actions 使用 Node.js 24，消除 Node 20 弃用警告
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      
     steps:
       # 步骤 1：检出代码
       # 将现有仓库 (Rabbit-Spec/Surge) 的代码下载到当前的虚拟机运行环境中
