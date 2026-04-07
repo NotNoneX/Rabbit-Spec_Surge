@@ -1,12 +1,8 @@
-# NAME: 深巷有喵的「Proxy」规则
+# NAME: 深巷有喵的「Proxy_All_No_Resolve」规则
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026.04.07 19:08:43
-# TOTAL RULES: 6730
-
-# ======= 手动维护规则 ========
-DOMAIN-SUFFIX,snbforums.com
-
+# UPDATED: 2026.04.07 21:06:54
+# TOTAL RULES: 6729
 
 # ======= 上游同步规则 ========
 DOMAIN,api.waqi.info
