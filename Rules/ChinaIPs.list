@@ -1,7 +1,7 @@
 # NAME: ChinaIPs
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026-04-07 15:23:57
+# UPDATED: 2026-04-07 15:27:22
 IP-CIDR,1.0.1.0/24
 IP-CIDR,1.0.2.0/23
 IP-CIDR,1.0.8.0/21
