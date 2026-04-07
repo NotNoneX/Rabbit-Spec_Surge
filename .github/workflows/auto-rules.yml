@@ -1,13 +1,9 @@
-# 深巷有喵的「Surge」配置规则
-# 日期：2026-04-07
-# 配置作者：https://github.com/Rabbit-Spec/Surge
-
-name: Auto-Surge-Rules
+name: Auto Surge Rules
 
 # 触发器配置
 on:
   schedule:
-    # 定时任务：每天 UTC 时间 23:00 执行（北京时间 07:00）
+    # 定时任务：北京时间每天 07:00 执行
     - cron: '0 23 * * *'
   # 允许手动触发
   workflow_dispatch:
@@ -29,7 +25,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 步骤 2：下载、合并手动规则、排除指定规则并归档
+      # 步骤 2：下载、清洗、聚合分段并归档
       - name: Download, Merge and Filter Rules
         run: |
           # 创建输出目录及手动规则存储目录
@@ -38,9 +34,9 @@ jobs:
           # 获取北京时间
           UPDATE_TIME=$(TZ="Asia/Shanghai" date +"%Y-%m-%d %H:%M:%S")
           
-          # 封装处理函数
+          # 1. 定义标准处理函数 (用于 1对1 的规则同步)
           process_rule() {
-            local source_file=$1
+            local source_url=$1
             local target_name=$2
             local display_name=$3
             
@@ -49,14 +45,14 @@ jobs:
             local manual_file="Rules/Manual/${filename_no_ext}.txt"
             local exclude_file="Rules/Manual/${filename_no_ext}.exclude.txt"
             
-            # 1. 写入 Header 信息
+            # 写入统一 Header
             echo "# NAME: $display_name" > "$target_path"
             echo "# AUTHOR: Rabbit-Spec" >> "$target_path"
             echo "# REPO: https://github.com/Rabbit-Spec/Surge" >> "$target_path"
             echo "# UPDATED: $UPDATE_TIME" >> "$target_path"
             echo "" >> "$target_path"
             
-            # 2. 合并手动追加规则 (Rules/Manual/*.txt)
+            # 合并手动追加规则
             if [ -f "$manual_file" ]; then
               echo "# ======= 手动维护规则 ========" >> "$target_path"
               cat "$manual_file" >> "$target_path"
@@ -64,39 +60,80 @@ jobs:
               echo "" >> "$target_path"
             fi
             
-            # 3. 追加上游同步规则并执行排除过滤
+            # 追加上游同步规则
             echo "# ======= 上游同步规则 ========" >> "$target_path"
-            
             if [ -f "$exclude_file" ] && [ -s "$exclude_file" ]; then
-              # 如果排除文件存在且不为空，执行过滤逻辑
-              # -v: 排除匹配项, -F: 纯文本匹配, -f: 从文件读取关键字
-              curl -sL "$BASE_URL/$source_file" | grep -vFf "$exclude_file" >> "$target_path"
+              curl -sL "$source_url" | grep -v '^#' | grep -vFf "$exclude_file" >> "$target_path"
             else
-              # 否则直接追加全量上游规则
-              curl -sL "$BASE_URL/$source_file" >> "$target_path"
+              curl -sL "$source_url" | grep -v '^#' >> "$target_path"
             fi
           }
           
-          # --- 第一部分：Loyalsoldier 仓库规则 ---
-          BASE_URL="https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release"
-          process_rule "proxy.txt" "Proxy.list" "深巷有喵的「Proxy」规则"
-          process_rule "direct.txt" "China.list" "深巷有喵的「China」规则"
-          process_rule "cncidr.txt" "ChinaCIDR.list" "深巷有喵的「ChinaCIDR」规则"
+          # --- 第一部分：常规规则同步 ---
+          BASE_LOYAL="https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release"
+          process_rule "$BASE_LOYAL/proxy.txt" "Proxy.list" "Proxy"
+          process_rule "$BASE_LOYAL/direct.txt" "China.list" "China"
+          process_rule "$BASE_LOYAL/cncidr.txt" "ChinaCIDR.list" "ChinaCIDR"
           
-          # --- 第二部分：EAlyce 仓库规则 ---
-          BASE_URL="https://raw.githubusercontent.com/EAlyce/conf/refs/heads/main/Rule"
-          process_rule "OpenAI.list" "AIGC.list" "深巷有喵的「AIGC」规则"
+          BASE_EALYCE="https://raw.githubusercontent.com/EAlyce/conf/refs/heads/main/Rule"
+          process_rule "$BASE_EALYCE/OpenAI.list" "AIGC.list" "AIGC"
+          
+          # --- 第二部分：blackmatrix7 游戏规则分段聚合 (Game.list) ---
+          GAME_TARGET="Rules/Game.list"
+          GAME_EXCLUDE="Rules/Manual/Game.exclude.txt"
+          GAME_MANUAL="Rules/Manual/Game.txt"
+          
+          # 写入聚合文件 Header
+          echo "# NAME: Game" > "$GAME_TARGET"
+          echo "# AUTHOR: Rabbit-Spec" >> "$GAME_TARGET"
+          echo "# REPO: https://github.com/Rabbit-Spec/Surge" >> "$GAME_TARGET"
+          echo "# UPDATED: $UPDATE_TIME" >> "$GAME_TARGET"
+          echo "" >> "$GAME_TARGET"
+          
+          # 写入 Game 手动规则
+          if [ -f "$GAME_MANUAL" ]; then
+            echo "# ======= 手动维护规则 ========" >> "$GAME_TARGET"
+            cat "$GAME_MANUAL" >> "$GAME_TARGET"
+            echo "" >> "$GAME_TARGET"
+            echo "" >> "$GAME_TARGET"
+          fi
+          
+          # 定义游戏子源：格式为 "显示名称|URL"
+          GAME_SUBS=(
+            "Epic|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Epic/Epic.list"
+            "Sony|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Sony/Sony.list"
+            "Steam|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Steam/Steam.list"
+            "Nintendo|https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/release/rule/Surge/Nintendo/Nintendo.list"
+          )
+          
+          # 循环处理每个游戏子源
+          for sub in "${GAME_SUBS[@]}"; do
+            name="${sub%%|*}"
+            url="${sub#*|}"
+            
+            # 写入分段标识符
+            echo "# ======= $name ========" >> "$GAME_TARGET"
+            
+            # 抓取、清洗、排除并追加
+            if [ -f "$GAME_EXCLUDE" ] && [ -s "$GAME_EXCLUDE" ]; then
+              curl -sL "$url" | grep -v '^#' | grep -vFf "$GAME_EXCLUDE" >> "$GAME_TARGET"
+            else
+              curl -sL "$url" | grep -v '^#' >> "$GAME_TARGET"
+            fi
+            
+            # 段落间距：注入两个换行符提升可读性
+            echo "" >> "$GAME_TARGET"
+            echo "" >> "$GAME_TARGET"
+          done
 
       # 步骤 3：Git 提交与推送到远程仓库
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
           git add Rules/
-          
           if ! git diff --staged --quiet; then
             COMMIT_DATE=$(TZ="Asia/Shanghai" date +"%Y.%m.%d")
-            git commit -m "$COMMIT_DATE Auto-update Surge Rules from multi-sources"
+            git commit -m "$COMMIT_DATE Auto-update Surge Rules (Segmented Game Aggregation)"
             git push
           fi
