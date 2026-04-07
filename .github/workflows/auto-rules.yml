@@ -8,8 +8,8 @@ name: Auto-Surge-Rules
 # 触发器配置
 on:
   schedule:
-    # 定时任务：北京时间每天 07:00 执行
-    - cron: '0 23 * * *'
+    # 定时任务：北京时间每天 05:00 执行
+    - cron: '0 21 * * *'
   # 允许手动触发
   workflow_dispatch:
 
