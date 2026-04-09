@@ -1,8 +1,8 @@
 # NAME: 深巷有喵的「Proxy」规则
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026.04.09 04:50:48
-# TOTAL: 6765
+# UPDATED: 2026.04.10 04:56:33
+# TOTAL: 6767
 
 # ======= 手动维护规则 ========
 # snbforums
@@ -1283,6 +1283,7 @@ DOMAIN-SUFFIX,cpj.org
 DOMAIN-SUFFIX,cpu-monkey.com
 DOMAIN-SUFFIX,cq99.us
 DOMAIN-SUFFIX,crackle.com
+DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,crazypool.org
 DOMAIN-SUFFIX,crazys.cc
 DOMAIN-SUFFIX,crazyshit.com
@@ -3607,6 +3608,7 @@ DOMAIN-SUFFIX,mirrormedia.mg
 DOMAIN-SUFFIX,missav.com
 DOMAIN-SUFFIX,missav.ws
 DOMAIN-SUFFIX,mist.vip
+DOMAIN-SUFFIX,mistral.ai
 DOMAIN-SUFFIX,mit.edu
 DOMAIN-SUFFIX,mitao.com.tw
 DOMAIN-SUFFIX,mitbbs.com
