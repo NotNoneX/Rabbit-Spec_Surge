@@ -1,13 +1,14 @@
 # NAME: 深巷有喵的「Proxy」规则
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026.04.09 04:54:38
+# UPDATED: 2026.04.09 23:08:18
 # TOTAL: 6765
 
 # ======= 手动维护规则 ========
 # snbforums
 DOMAIN-SUFFIX,snbforums.com
-# Github
+
+# ======= GitHub ========
 DOMAIN-SUFFIX,atom.io
 DOMAIN-SUFFIX,dependabot.com
 DOMAIN-SUFFIX,ghcr.io
@@ -40,7 +41,7 @@ DOMAIN-SUFFIX,repo.new
 DOMAIN-SUFFIX,thegithubshop.com
 DOMAIN-KEYWORD,github
 
-# ======= 上游同步规则 ========
+# ======= Proxy ========
 DOMAIN,api.waqi.info
 DOMAIN,aqi.aqicn.org
 DOMAIN,assets-priconne-redive-us.akamaized.net
@@ -6774,3 +6775,4 @@ USER-AGENT,WhatsApp*
 USER-AGENT,battleroyale*
 USER-AGENT,com.apple.trustd*
 USER-AGENT,hearthstone*
+
