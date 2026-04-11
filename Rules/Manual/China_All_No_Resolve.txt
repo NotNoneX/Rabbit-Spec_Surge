@@ -8,3 +8,5 @@ DOMAIN-SUFFIX,asus.com
 DOMAIN-SUFFIX,agilebits.com
 DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,1passwordusercontent.com
+# 圆刚采集卡
+DOMAIN-SUFFIX,avermedia.com
