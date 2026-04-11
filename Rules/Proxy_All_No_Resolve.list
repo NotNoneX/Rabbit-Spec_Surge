@@ -1,7 +1,7 @@
 # NAME: 深巷有喵的「Proxy」规则
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026.04.11 04:43:35
+# UPDATED: 2026.04.12 04:39:24
 # TOTAL: 6767
 
 # ======= 手动维护规则 ========
@@ -377,10 +377,10 @@ DOMAIN-SUFFIX,angularjs.org
 DOMAIN-SUFFIX,animecrazy.net
 DOMAIN-SUFFIX,animeshippuuden.com
 DOMAIN-SUFFIX,aniscartujo.com
-DOMAIN-SUFFIX,annas-archive.in
-DOMAIN-SUFFIX,annas-archive.li
+DOMAIN-SUFFIX,annas-archive.gd
+DOMAIN-SUFFIX,annas-archive.gl
 DOMAIN-SUFFIX,annas-archive.org
-DOMAIN-SUFFIX,annas-archive.pm
+DOMAIN-SUFFIX,annas-archive.pk
 DOMAIN-SUFFIX,annas-archive.se
 DOMAIN-SUFFIX,annatam.com
 DOMAIN-SUFFIX,anobii.com
