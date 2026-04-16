@@ -6,3 +6,5 @@ DOMAIN-SUFFIX,asuswrt-merlin.net
 DOMAIN-SUFFIX,caldigit.com
 # OnlyFans
 DOMAIN-SUFFIX,onlyfans.com
+# Dbrand
+DOMAIN-SUFFIX,dbrand.com
