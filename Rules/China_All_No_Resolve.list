@@ -1,8 +1,8 @@
 # NAME: 深巷有喵的「China」规则
 # AUTHOR: Rabbit-Spec
 # REPO: https://github.com/Rabbit-Spec/Surge
-# UPDATED: 2026.05.09 05:06:24
-# TOTAL: 3760
+# UPDATED: 2026.05.10 04:50:50
+# TOTAL: 3756
 
 # ======= 手动维护规则 ========
 DOMAIN-SUFFIX,immersivetranslate.com
@@ -12,7 +12,6 @@ DOMAIN-SUFFIX,petkit.com
 DOMAIN,analytics.strava.com
 DOMAIN,blzddist1-a.akamaihd.net
 DOMAIN,cdn.angruo.com
-DOMAIN,cdn.lilyemby.com
 DOMAIN,client.amplifi.com
 DOMAIN,download.jetbrains.com
 DOMAIN,download.microsoft.com
@@ -22,10 +21,8 @@ DOMAIN,kc.kexinshe.com
 DOMAIN,ntservicepack.microsoft.com
 DOMAIN,origin-a.akamaihd.ne
 DOMAIN,origin-a.akamaihd.net
-DOMAIN,smart.uhdnow.com
 DOMAIN,sms.imagetasks.com
 DOMAIN,steamcommunity-a.akamaihd.net
-DOMAIN,tx.lilyemby.com
 DOMAIN,weixin.com
 DOMAIN,www.libvideo.com
 DOMAIN,www.yxssp.com
@@ -1954,7 +1951,6 @@ DOMAIN-SUFFIX,jiayuan.com
 DOMAIN-SUFFIX,jiazhao.com
 DOMAIN-SUFFIX,jibencaozuo.com
 DOMAIN-SUFFIX,jidian.im
-DOMAIN-SUFFIX,jiedaibao.gs
 DOMAIN-SUFFIX,jiemeng8.com
 DOMAIN-SUFFIX,jiemian.com
 DOMAIN-SUFFIX,jikeiot.cloud
