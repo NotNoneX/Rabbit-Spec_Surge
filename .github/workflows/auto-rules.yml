@@ -122,6 +122,9 @@ jobs:
           URL_PROXY="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Instagram/Instagram.list"
           process_rule "$URL_PROXY" "Instagram.list" "深巷有喵的「Instagram」规则"
 
+          URL_PROXY="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Facebook/Facebook.list"
+          process_rule "$URL_PROXY" "Facebook.list" "深巷有喵的「Facebook」规则"
+
           URL_PROXY="https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list"
           process_rule "$URL_PROXY" "Microsoft.list" "深巷有喵的「Microsoft」规则"
 
